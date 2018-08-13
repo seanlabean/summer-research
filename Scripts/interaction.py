@@ -180,7 +180,7 @@ def plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, output_filename):
     plot.plot(xbh1.value_in(units.parsec), ybh1.value_in(units.parsec), color = 'k',label='BH1')
     plot.plot(xbh2.value_in(units.parsec), ybh2.value_in(units.parsec), color = 'b',label='BH2')
     plot.legend(loc='lower center')
-    save_file = output_filename
+    save_file = './Images/'+output_filename
     pyplot.savefig(save_file)
     print '\nSaved figure in file', save_file, '\n'
     pyplot.show()
@@ -249,7 +249,7 @@ def plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, en
     pyplot.ylabel(y_label)
     plot.plot(phase_list, bh1min_dist, ls = '-')
     plot.plot(phase_list, bh2min_dist, ls = '-')
-    save_file = 'bh_min_dist.png'
+    save_file = './Images/'+'bh_min_dist.png'
     pyplot.savefig(save_file)
     pyplot.show()
 #plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position)
@@ -328,7 +328,7 @@ def plot_energy(bh1_energy, bh2_energy, bbh_energy, hvgc_energy, total_energy, t
 #    plot.semilogy(bh2_energy, label='BH2')
 #    plot.semilogy(total_energy, color = 'b',label='Total')
 #    plot.legend()
-    save_file = filename
+    save_file = './Images/' + filename
     pyplot.savefig(save_file)
     print '\nSaved figure in file', save_file, '\n'
     pyplot.show()

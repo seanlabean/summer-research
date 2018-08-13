@@ -1,0 +1,16 @@
+#Python Backup#
+*.pyc
+*~
+
+#Text Editor#
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*syntex.gz
+*.toc
+
+#iPython#
+*DS_Store
+.ipynb_checkpoints

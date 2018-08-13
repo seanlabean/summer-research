@@ -1,0 +1,99 @@
+\documentclass{aastex62}
+
+\received{September 4th, 2018}
+
+\submitjournal{Drexel University Department of Physics}
+
+
+%\shorttitle{Sample article}
+%\shortauthors{Schwarz et al.}
+%\newcommand{\vdag}{(v)^\dagger}
+%\newcommand\aastex{AAS\TeX}
+%\newcommand\latex{La\TeX}
+
+\begin{document}
+
+\title{CAN A CLOSE ENCOUNTER WITH A SUPERMASSIVE BINARY BLACK HOLE PRODUCE A HYPERVELOCITY GLOBULAR CLUSTER?}
+
+\author{Sean C. Lewis}
+\affil{Drexel University Department of Physics \\
+Philly}
+
+
+
+\begin{abstract}
+
+Abstract
+
+\end{abstract}
+\section{Introduction} \label{sec:intro}
+Astrophysical objects with velocities exceeding 1000 km/s relative to their surroundings are described as  "hypervelocity objects". Of course, any such object is expected to have undergone an extreme gravitational interaction. The most common hypervelocity object directly observed are hypervelocity stars within the Milky Way.  Such objects' possible acceleration mechanisms (gravitational encounters of single stars, tidal disruptions of a stellar binary, and encounters with a binary supermassive black hole) have been explored extensively. In 2014, a comprehensive spectroscopic survey of the massive galaxy M87 noted one particular source to have an extraordinary blueshift compared to the relatively redshifted galaxy. The source's emission spectrum was extremely blue-shifted corresponding to a velocity of ~2300 km/s relative to M87. Further analysis of the object's spectra provided modest evidence for the presence of a globular cluster, making it the first directly observed hypervelocity globular cluster, denoted as HVGC-1. Within the paper declaring and supporting HVGC-1's discovery, two possible acceleration methods are proposed along with requests for further analysis through simulation. The first: the globular cluster passed between two separated dark matter potentials. This possibility was addressed briefly in Samsing (2015) and, although further numerical simulations are requested, it will not be explored in this paper. The second possibility: HVGC-1 had a close encounter with a supermassive binary black hole  (SMBBH). It has been proposed that SMBBHs are sources for some of the more extreme hypervelocity objects such as individual stars (Yu \& Tremaine, 2003) and intracluster planetary nebulae (Holley-Bockelmann et al., 2005). Although no direct observations of a binary black hole system in M87 has been made, strong evidence exists for the presence of a single supermassive black hole at the galaxy's center (Gebhardt, 2011). In addition, it is presumed that a large galaxy like M87 evolve through mergers (e.g., van Dokkum 2005) and, with supermassive black holes being a standard component of elliptical galaxies and spiral bulges, it is a reasonable assumption that a binary black hole of comparable masses could be present in M87. 
+
+As stated in both Caldwell (2014) and Samsing (2015), there is minimal likelihood that such an encounter could produce an intact globular cluster. It may be the case that, in order to receive a significant velocity kick, the cluster must pass within 10 parsecs of the BBH. Indeed, Caldwell presents scenarios in which a $2*10^6M_{sun}$ cluster passes 2-3 parsecs from the supermassive black hole, an interaction in which the tidal radius on the globular cluster would be 0.3-0.4 pc. Undoubtedly, for a cluster of presumed radius ~6-10 pc, this would be a devastating event, potentially resulting in only the core of the cluster surviving. However, a simple keplerian calculation reveals the time spent in the vicinity of the SMBBH is small, on the order of 5000 years. So, the cluster will experience the extreme tidal forces in the form of nearly a delta function. In addition, if outer stars are being stripped from the cluster, the change in mass may result in a higher exit velocity, making the achievability of "hypervelocity" more reasonable. It is the goal of this paper and analysis to determine the fate of such a globular cluster. 
+
+\section{Creating a simple gravity slingshot}
+\subsection{AMUSE Framework}
+The Astrophysical Multipurpose Software Environment (AMUSE) is used to accurately model and analyze the behavior of a globular cluster and its constituent stars throughout its close pass with a SMBBH. AMUSE uses an integrator to evolve a gravitational system while also allowing the user to pause said integration and record data such as particle mass, position, velocity, and energy. I chose to use the N-body integrator ph4. Although I initially investigated a simple system of 3 point-particles, the use of ph4 would become necessary once the globular cluster particle was expanded to include {\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}1000 stars. 
+
+\subsection{Initial Conditions}
+As stated in the previous subsection, I began my simulation construction by generating and evolving a simple 3-body interaction. Two of the bodies acted as the supermassive black holes: each were given an appropriate mass and orbit parameters based on user defined total mass, mass ratio, and constant separation distance. This binary system was simplified into a nested set of circular orbits. The initial position and velocity vector components of the black hole particles were calculated with basic orbital mechanics and trigonometry. I will refer to the "phase" of the black holes throughout this paper. If both black holes were placed along the x-axis at the beginning of integration, the black holes are said to have a phase of 0 radians. A phase of $\pi$ radians corresponds to the black holes lying on the y-axis. The code also places a globular cluster particle at a distance of {\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}120 parsecs away from the black hole binary in the same plane as the binary orbits. The distance is an estimate because, in addition to being initially displaced from the SMBBH by set 100 pc along the y-axis, the GC is offset along the x-axis by the impact parameter of the interaction. The impact parameter is calculated by examining the conservation of energy and angular momentum of the globular cluster as it travels from "infinity" to its closest approach to the black holes:
+\begin{equation}
+\frac{1}{2}v_{\infty}^2 = \frac{1}{2}v_{c}^2 - \frac{GM_{BH}}{r_{c}}
+\end{equation}
+\begin{equation}
+L = v_{\infty}b = v_{c}r_{c}
+\end{equation}
+\begin{equation}
+b = r_{c}\sqrt{1+\frac{GM_{BH}}{r_{c}v_{\infty}^2}}
+\end{equation}
+Where $v_{\infty}$ is the GC initial velocity far from the black hole binary, $v_{c}$ is the GC velocity at closest approach, G is the gravitational constant, $M_{BH}$ is the total mass of the black hole binary, $r_{c}$ is the GC's closest approach to the BBH center of mass, and b is the impact parameter.  In addition, an unvaried $v_{\infty}$ and $M_{BH}$ were chosen as 500 km/s and $7 \times 10^9 M_{\odot}$ respectively. So, by asserting a distance of closest approach, AMUSE will generate a simulation in which the GC falls towards the SMBBH, undergo a prograde planar interaction, and then have the GC's exit velocity recorded once it reaches 120 pc away from the BBH. 
+
+\subsection{Cluster Exit Velocity and BH Phase Dependence}
+The cluster's exit velocity depends heavily on the location of the black holes during its closest approach to the binary. In order to determine the ideal location of the BH's during the interaction, the simulation was repeated while varying the initial phase of the black holes. This is analogous to varying the BH phase during closest approach. The result: a BH phase dependent exit velocity that clearly shows two peaks corresponding to the cluster arriving at the SMBBH while the outer and inner BH are in phase with it, see Figure 1.
+\begin{figure}
+\figurenum{1}
+\plotone{./Images/phase_loop_curated.png}
+
+\caption{text}
+\end{figure}
+Interestingly, some BH phases result in the test particle becoming captured by the binary black hole system. An easy check to confirm a gravity capture is taking place (as opposed to some odd unintended consequence within the AMUSE code) is to investigate the test particle's energy during the interaction. It would be expected that the particle's total energy relative to the center of mass of the system is a conserved quantity, that is, until a close pass with the SMBBH whereafter the particle's energy will be lower. Indeed, this is what is observed, see Figure 2. For comparison, an interaction that results in the ejection of the GC will have the GC's relative energy also remain constant as it infalls towards the SMBBH, then have a positive shift after the interaction, see Figure 3. Interactions that result in a captured GC test particle were discarded and not considered further as this investigation focuses only on the possibility of a GC being ejected at greater than 1000 km/s, but such interactions may be useful for further simulations regarding stellar or more complex structure capture by binary black holes.
+
+\begin{figure}
+\figurenum{1}
+\plottwo{./Images/bound_track.png}{./Images/bound_energy.png}
+
+\caption{Left: The globular cluster (red path) begins its path at the bottom right at (38 pc, -100 pc) and begins infalling towards the black hole binary (black path: more massive BH, blue path: less massive BH. Notice how the GC appears to be tracing a path that is beginning to turn back around towards the SMBBH. Right: The relative energy, in Joules, of the globular cluster during throughout its journey towards, around, and away from the SMBBH. The oscillation and large spike are due to the gravitational potential close to the SMBBH becomes more significantly more complex than the assumed point mass viewed from infinity. Here, the GC begins at -3.15E48 J of relative energy and ends with -4.42E48 J, a 40.3\% decrease in energy relative to the center of mass of the system.}
+\end{figure}
+
+\begin{figure}
+\figurenum{2}
+\plottwo{./Images/unbound_track.png}{./Images/unbound_energy.png}
+
+\caption{Left: All initial conditions are equal to those in Figure 1 except for the location of the black holes in their orbit during the GC's closest pass. Notice, the GC (red line) makes a much more direct path away from the SMBBH than in Figure 1. Right: After its interaction with the SMBBH, the GC has gained relative energy and has been ejected from the system. Here, the GC begins with -3.15E48 J of energy (the same as in Figure 1) and ends with +1.94E48 J, a 161.6\% increase in energy.}
+\end{figure}
+\subsection{Operational Parameters}
+So, the operational parameters of this prograde planar interaction were BH mass ratio, the separation of the BHs, the GC's closest approach, and BH phase. These values were varied to explore the parameter space in an attempt to determine the combination that resulted in the highest GC exit velocity and smallest tidal force. A small tidal force implies a higher likelihood of a significant fraction of the star cluster surviving the interaction. 
+\subsection{Optimum Interaction}
+\begin{table}
+\centering
+\caption{text\label{key}}
+
+\begin{tabular}{ccccc}
+\hline \hline
+Velocity & BH Mass Ratio & BH Separation (pc) & C & BH Initial Phase \\
+1108.74765364 & 0.05 & 1.7 & 1.5 & 0.785398163397 \\
+1755.73352712 & 0.05 & 1.7 & 1.5 & 0.942477796077 \\
+1930.53967716 & 0.05 & 1.7 & 1.5 & 1.09955742876 \\
+1851.73574831 & 0.05 & 1.7 & 1.5 & 1.25663706144 \\
+1671.60162079 & 0.05 & 1.7 & 1.5 & 1.41371669412 \\
+1447.81999646 & 0.05 & 1.7 & 1.5 & 1.57079632679
+\end{tabular}
+\end{table}
+\ref{key} hghgh
+
+\section{A Close Pass of a GC with a SMBBH}
+
+\begin{thebibliography}{}
+
+\end{thebibliography}
+\end{document}

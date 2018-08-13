@@ -1,0 +1,137 @@
+% Drexel Official Beamer Template 
+% For use by members of the Drexel IceCube group
+%
+% AUTHORS: (please add yourself as you contribute)
+% Mike Richman (richman@drexel.edu)
+% Dan Douglas (daniel.douglas@drexel.edu)
+%
+% Based on Dresden theme: original copyright info below:
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\RequirePackage{graphicx}
+
+\mode<presentation>
+
+% Base of theme
+\useoutertheme[footline=authorinstitutetitle]{miniframes}
+\useinnertheme[shadow]{rounded}
+
+
+% Comment this line to keep navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Define Drexel colors
+\definecolor{DrexelBlue}{RGB}{7, 41, 78}
+\definecolor{DrexelGold}{RGB}{255, 197, 1}
+
+% Set colors
+\setbeamercolor{titlelike}{parent=structure}
+\setbeamercolor*{palette secondary}{fg=DrexelBlue, bg=DrexelGold} % inner bands
+\setbeamercolor*{palette tertiary}{fg=white, bg=DrexelBlue}       % outer bands
+\setbeamercolor{normal text}{fg=DrexelBlue!125, bg=white}
+\setbeamercolor*{titlelike}{use=structure, fg=DrexelBlue}
+\setbeamercolor{block title}{fg=white, bg=DrexelBlue}
+\setbeamercolor{block body}{fg=DrexelBlue!120, bg=DrexelBlue!05}
+\setbeamercolor{itemize item}{fg=DrexelBlue}
+\setbeamercolor{itemize subitem}{fg=DrexelBlue}
+\setbeamercolor{itemize subsubitem}{fg=DrexelBlue}
+\setbeamercolor{lower separation line head}{bg=DrexelBlue}
+\setbeamercolor{upper separation line foot}{bg=DrexelBlue}
+
+% Set itemize shapes
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[default]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+% Set up headline
+\makeatother
+\setbeamertemplate{headline}
+{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+    leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+    \usebeamerfont{subsection in head/foot}\insertsubsectionhead
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[colsep=.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+\makeatletter
+
+% Set up footline
+\makeatother
+\setbeamertemplate{footline}
+{%
+  \begin{beamercolorbox}[colsep=.5pt]{upper separation line foot}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+    leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+    \leavevmode{\usebeamerfont{author in head/foot}{\insertshortauthor}%
+    \hfill%
+    {\usebeamerfont{institute in head/foot}%
+    \usebeamercolor[fg]{author in head/foot}%
+    {\insertshortinstitute \hfill \insertshortdate}}}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+    leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    {\usebeamerfont{title in head/foot}{\insertshorttitle%
+    \hfill%
+    \insertframenumber~/~\inserttotalframenumber}}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+  \end{beamercolorbox}
+}
+\makeatletter
+
+% Set up title page
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \vspace{1em}
+  \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+  \usebeamerfont{subtitle}\insertsubtitle\par
+  \vspace{2em}
+  \quad\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par
+  %\quad\usebeamerfont{author}\usebeamercolor[fg]{author}\insertinstitute\par
+  \vspace{0.2em}
+  \quad\includegraphics[scale=0.1]{drexellogo_flat.png}\par 
+  \vspace{0.2em}
+  \quad\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate
+  \vspace{.4em}
+  %\vfill
+  \begin{center}
+    \makebox[0.50\paperwidth]{\includegraphics[scale=0.15]{IceCube_official_logo.pdf}}
+  \end{center}
+}
+
+% fix 1px offset for slides 2 and up
+\makeatletter \let\Hy@FixNotFirstPage=\relax \makeatother
+
+% don't count backup slides
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}
+   \appendix
+   \section{Backup}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+
+\mode
+<all>
+

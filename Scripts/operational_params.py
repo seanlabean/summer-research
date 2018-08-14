@@ -12,13 +12,13 @@ import time
 #Maybe import *?
 
 #import numpy as np
-#bbh_mass_ratio = [0.01, 0.05, 0.1]
-bbh_mass_ratio = [0.1]
-bbh_separation = [1.7] | units.parsec
-#bbh_separation = [1.7, 3, 5] | units.parsec
-#gc_closest_ratio = [1.5, 2, 2.5]
-gc_closest_ratio = [1.5, 2.5] 
-phase_step = np.pi/4
+bbh_mass_ratio = [0.05, 0.1, 0.25]
+#bbh_mass_ratio = [0.1]
+#bbh_separation = [1.7] | units.parsec
+bbh_separation = [1.7, 3, 5] | units.parsec
+gc_closest_ratio = [1.5, 1.7, 1.9]
+#gc_closest_ratio = [1.5, 2.5] 
+phase_step = np.pi/15
 #bbh_phase = np.arange(0, 2*np.pi, phase_step)
 #bbh_phase = bbh_phase.tolist()
 #particles = bbh_hvgc(bbh_mass, mass_ratio, bbh_separation, bbh_phase, gc_closest_ratio, gc_inf)
@@ -67,7 +67,7 @@ for a in gc_closest_ratio:
                     max_tide1, max_tide2 = tidal_ratio(a, i, j, phase)
                     raw_str = "{} {} {} {} {} {} {}\n".format(vel, i, j.value_in(units.parsec), a, phase, max_tide1, max_tide2)
                     raw.write(raw_str)
-                    table_str = "{} & {} & {} & {} & {} & {} & {} \\\ \n".format(vel, i, j.value_in(units.parsec), a, phase, max_tide1, max_tide2)
+                    table_str = "{:.0f} & {:.2f} & {:.1f} & {:.1f} & {:.2f} & {:.0f} & {:.0f} \\\ \n".format(vel, i, j.value_in(units.parsec), a*j.value_in(units.parsec), phase, max_tide1, max_tide2)
                     table.write(table_str)
                     print "Wrote"
                 else:

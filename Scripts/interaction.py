@@ -368,4 +368,5 @@ def tidal_ratio(gc_closest_ratio, bbh_mass_ratio, bbh_separation, phase):
         hvgc_pos = (hvgc.x**2 + hvgc.y**2 + hvgc.z**2).sqrt()
     max_tide1 = max(tide_ratio1)
     max_tide2 = max(tide_ratio2)
+    gravity.stop()
     return max_tide1, max_tide2

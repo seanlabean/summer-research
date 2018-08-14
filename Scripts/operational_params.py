@@ -5,6 +5,7 @@ from interaction import bbh_orbit
 from interaction import impact_parameter
 from integrator import integrate_system_final
 from interaction import bbh_hvgc
+from interaction import tidal_ratio
 import math
 import time
 #import matplotlib.pyplot as plt
@@ -63,9 +64,10 @@ for a in gc_closest_ratio:
                 vel_index = v[0]
                 phase = phase_list[vel_index]
                 if vel != 0:
-                    raw_str = "{} {} {} {} {} {} {}\n".format(vel, i, j.value_in(units.parsec), a, phase, 0., 0.)
+                    max_tide1, max_tide2 = tidal_ratio(a, i, j, phase)
+                    raw_str = "{} {} {} {} {} {} {}\n".format(vel, i, j.value_in(units.parsec), a, phase, max_tide1, max_tide2)
                     raw.write(raw_str)
-                    table_str = "{} & {} & {} & {} & {} & {} & {} \\\ \n".format(vel, i, j.value_in(units.parsec), a, phase, 0., 0.)
+                    table_str = "{} & {} & {} & {} & {} & {} & {} \\\ \n".format(vel, i, j.value_in(units.parsec), a, phase, max_tide1, max_tide2)
                     table.write(table_str)
                     print "Wrote"
                 else:
@@ -73,6 +75,7 @@ for a in gc_closest_ratio:
             count += 1
 raw.close()
 table.close()
+
 print "Done."
 print "Data written to "+table_data + " and "+script_data
 print("--- %s seconds ---" % (time.time() - start_time))

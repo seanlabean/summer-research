@@ -47,7 +47,10 @@ def operational_params(bbh_mass_ratio, bbh_separation,  gc_closest_ratio, bbh_ph
     return vel_list, phase_list
 
 start_time = time.time()
-f = open("results1.txt", "w+")
+table_data = 'results_table.txt'
+script_data = 'results_script.txt'
+table = open('./Text/'+table_data, "w+")
+raw = open('./Text/'+script_data, "w+")
 count = 1
 total = len(gc_closest_ratio)*len(bbh_mass_ratio)*len(bbh_separation)
 for a in gc_closest_ratio:
@@ -60,13 +63,16 @@ for a in gc_closest_ratio:
                 vel_index = v[0]
                 phase = phase_list[vel_index]
                 if vel != 0:
-                    result_str = "{} {} {} {} {} {} {}\n".format(vel, i, j.value_in(units.parsec), a, phase, 0., 0.)
-                    f.write(result_str)
+                    raw_str = "{} {} {} {} {} {} {}\n".format(vel, i, j.value_in(units.parsec), a, phase, 0., 0.)
+                    raw.write(raw_str)
+                    table_str = "{} & {} & {} & {} & {} & {} & {} \\\ \n".format(vel, i, j.value_in(units.parsec), a, phase, 0., 0.)
+                    table.write(table_str)
                     print "Wrote"
                 else:
                     continue
             count += 1
-f.close()
+raw.close()
+table.close()
 print "Done."
-print "Data written to results.txt"
+print "Data written to "+table_data + " and "+script_data
 print("--- %s seconds ---" % (time.time() - start_time))

@@ -89,7 +89,7 @@ def integrate_system(particles, end_position):
     gravity.stop()
     return hvgc_vel
 
-def bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position):
+def bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, file_name):
     """Makes particles given initial properties, integrates until GC reaches end position. Repeats for different initial black hole phase. Saves final velocity of GC and corresponding BH phase. Plots phase vs. velocity to show phase dependence and maximum velocity kick."""
     from matplotlib import pyplot
     phase_list = []
@@ -114,7 +114,7 @@ def bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vi
     pyplot.xlabel(x_label)
     pyplot.ylabel(y_label)
     plot.plot(phase_list, velocity_list, ls = '-')
-    save_file = 'phase_loop.png'
+    save_file = './Images/'+file_name
     pyplot.savefig(save_file)
     pyplot.show()
 
@@ -219,7 +219,7 @@ def integrate_minimum_distance(particles, end_position):
     gravity.stop()
     return hvgc_vel, gcbh1_distmin, gcbh2_distmin
 
-def plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position):
+def plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, file_name):
     from matplotlib import pyplot
     phase_list = []
     velocity_list = []
@@ -249,10 +249,9 @@ def plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, en
     pyplot.ylabel(y_label)
     plot.plot(phase_list, bh1min_dist, ls = '-')
     plot.plot(phase_list, bh2min_dist, ls = '-')
-    save_file = './Images/'+'bh_min_dist.png'
+    save_file = './Images/'+file_name
     pyplot.savefig(save_file)
     pyplot.show()
-#plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position)
 
 
 ########################################################################################    

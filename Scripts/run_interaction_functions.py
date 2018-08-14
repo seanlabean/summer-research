@@ -21,13 +21,13 @@ particles = bbh_hvgc(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_
 end_position = 120 | units.parsec
 
 #Final Velocity vs. Phase#
-#bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position) 
+#bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position,'phase_loop.png') 
 
 #GC Behavior#
 hvgc_vel, xgc, ygc, xbh1, ybh1, xbh2, ybh2 = integrate_plotting(particles, end_position)
 plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, "hvgc1.png")
 
-#plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position)
+#plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, 'bh_min_dist.png')
 
 
 #Particle Energy#

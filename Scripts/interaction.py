@@ -351,7 +351,7 @@ def tidal_ratio(gc_closest_ratio, bbh_mass_ratio, bbh_separation, phase):
     bh2 = gravity.particles[1]
     hvgc = gravity.particles[2]
     hvgc_pos = (hvgc.x**2 + hvgc.y**2 + hvgc.z**2).sqrt()
-    hvgc_int_acc = 1e7/10
+    hvgc_int_acc = 1e7/1000
     tide_ratio1 = []
     tide_ratio2 = []
     

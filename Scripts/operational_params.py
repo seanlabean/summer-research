@@ -54,9 +54,9 @@ table = open('./Text/'+table_data, "w+")
 raw = open('./Text/'+script_data, "w+")
 count = 1
 total = len(gc_closest_ratio)*len(bbh_mass_ratio)*len(bbh_separation)
-for a in gc_closest_ratio:
-    for i in bbh_mass_ratio:
-        for j in bbh_separation:
+for i in bbh_mass_ratio:
+    for j in bbh_separation:
+        for a in gc_closest_ratio:
             print "%d out of %d Calculating maximum velocity..." %(count, total)
             vel_list, phase_list = operational_params(i, j, a, phase_step)
             for v in enumerate(vel_list):

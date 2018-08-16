@@ -50,12 +50,12 @@ Where $v_{\infty}$ is the GC initial velocity far from the black hole binary, $v
 
 \subsection{Cluster Exit Velocity and BH Phase Dependence}
 The cluster's exit velocity depends heavily on the location of the black holes during its closest approach to the binary. In order to determine the ideal location of the BH's during the interaction, the simulation was repeated while varying the initial phase of the black holes. This is analogous to varying the BH phase during closest approach. The result: a BH phase dependent exit velocity that clearly shows two peaks corresponding to the cluster arriving at the SMBBH while the outer and inner BH are in phase with it, see Figure 1.
-\begin{figure}
-\figurenum{1}
-\plotone{./Images/phase_loop_curated.png}
+%\begin{figure}
+%\figurenum{1}
+%\plotone{./Images/phase_loop_curated.png}
 
-\caption{text}
-\end{figure}
+%\caption{text}
+%\end{figure}
 Interestingly, some BH phases result in the test particle becoming captured by the binary black hole system. An easy check to confirm a gravity capture is taking place (as opposed to some odd unintended consequence within the AMUSE code) is to investigate the test particle's energy during the interaction. It would be expected that the particle's total energy relative to the center of mass of the system is a conserved quantity, that is, until a close pass with the SMBBH whereafter the particle's energy will be lower. Indeed, this is what is observed, see Figure 2. For comparison, an interaction that results in the ejection of the GC will have the GC's relative energy also remain constant as it infalls towards the SMBBH, then have a positive shift after the interaction, see Figure 3. Interactions that result in a captured GC test particle were discarded and not considered further as this investigation focuses only on the possibility of a GC being ejected at greater than 1000 km/s, but such interactions may be useful for further simulations regarding stellar or more complex structure capture by binary black holes.
 
 \begin{figure}
@@ -72,165 +72,22 @@ Interestingly, some BH phases result in the test particle becoming captured by t
 \caption{Left: All initial conditions are equal to those in Figure 1 except for the location of the black holes in their orbit during the GC's closest pass. Notice, the GC (red line) makes a much more direct path away from the SMBBH than in Figure 1. Right: After its interaction with the SMBBH, the GC has gained relative energy and has been ejected from the system. Here, the GC begins with -3.15E48 J of energy (the same as in Figure 1) and ends with +1.94E48 J, a 161.6\% increase in energy.}
 \end{figure}
 \subsection{Operational Parameters}
-So, the operational parameters of this prograde planar interaction were BH mass ratio, the separation of the BHs, the GC's closest approach, and BH phase. These values were varied to explore the parameter space in an attempt to determine the combination that resulted in the highest GC exit velocity and smallest tidal force. A small tidal force implies a higher likelihood of a significant fraction of the star cluster surviving the interaction. 
+So, the operational parameters of this prograde planar interaction were BH mass ratio, the separation of the BHs, the GC's closest approach, and BH phase. These values were varied to explore the parameter space in an attempt to determine the combination that resulted in the highest GC exit velocity and smallest tidal perturbation: $\gamma = {a_{t}}/{a_i}$ where $a_{t}$ is the tidal acceleration of the GC due to the presence of the external BH gravity well and $a_{i}$ is the internal acceleration of the GC. A small tidal perturbation implies a higher likelihood of a significant fraction of the star cluster surviving the interaction. To explore a large range of parameter space, the following were chosen: BH mass ratio [0.01, 0.05, 0.1, 0.25], BH Axis (pc) [1.7, 3.0, 5.0], GC closest approach (number of times greater than the BH Axis) [1.5, 2, 2.5]. With each combination of parameters, the interaction was repeated with initial BH phases varying by steps in $\pi/15$ such that the most optimum orientation of the BHs can be isolated and investigated further. 
 \subsection{Optimum Interaction}
+In total, 1,080 simulations were run and only 147 resulted in an GC exit velocity exceeding 1000 km/s, satisfying the "hypervelocity" condition. Of the 147, I chose three that were of particular interest, see Table \ref{results}. The first interaction listed has the highest velocity to tidal perturbation ratio out of all of the interactions, meaning the largest GC exit velocity and the smallest tidal acceleration experienced by the GC. The second interaction listed has the highest velocity to perturbation ratio for an event resulting in a velocity $>$2000 km/s. The third has the highest ratio for an interaction with a $>$3000 km/s exit velocity. Notice, all three interaction involve a BBH mass ratio of 0.25, as did the majority of the 147 hypervelocity interactions (63$\%$). The higher mass ratio allows the GC to receive a substantial velocity kick while remaining further away from the black hole binary, resulting in a lower tidal perturbation. Although, to describe the tidal perturbation as "low" would be to misrepresent the nature of the encounter. Even in the ideal scenario (the first interaction in Table \ref{results}), the tides experienced by the GC due to the presence of BH masses $M_{1}$ and $M_{2}$ reach a respective maximum at 650 and 693 times the internal acceleration of the star cluster. This highlights the extraordinary nature of the encounter, and implies that the cluster will almost certainly be torn apart unless the tidal ratio remains high for a brief enough time period.
 \begin{table}
 \centering
-\caption{text\label{key}}
+\caption{Interactions of interest. Columns from left to right: Exit velocity of the GC 120 pc away from the BBH, mass ratio of the black holes, BH separation distance, Minimum distance from the binary center of mass achieved by the GC, Initial BH phase, Maximum tidal perturbation experienced by the GC due to $M_{1}$ (more massive component), Maximum tidal perturbation due to $M_{2}$. \label{results}}
 
 \begin{tabular}{ccccccc}
 \hline \hline
-Velocity (km/s) & BH Mass Ratio & BH Axis (pc) & Min Dist. (pc) & BH Phase (rad) & M1 Tide & M2 Tide \\
-1720 & 0.05 & 1.7 & 2.5 & 1.05 & 394 & 402 \\ 
-1947 & 0.05 & 1.7 & 2.5 & 1.26 & 386 & 253 \\ 
-1795 & 0.05 & 1.7 & 2.5 & 1.47 & 374 & 143 \\ 
-1521 & 0.05 & 1.7 & 2.5 & 1.68 & 366 & 78 \\ 
-1211 & 0.05 & 1.7 & 2.5 & 1.88 & 355 & 48 \\ 
-1365 & 0.05 & 3.0 & 4.5 & 4.19 & 66 & 52 \\ 
-1381 & 0.05 & 3.0 & 4.5 & 4.40 & 65 & 32 \\ 
-1241 & 0.05 & 3.0 & 4.5 & 4.61 & 64 & 19 \\ 
-1047 & 0.05 & 3.0 & 4.5 & 4.82 & 63 & 11 \\ 
-1001 & 0.05 & 5.0 & 7.5 & 0.42 & 13 & 9 \\ 
-1014 & 0.05 & 5.0 & 7.5 & 0.63 & 13 & 6 \\ 
-2314 & 0.10 & 1.7 & 2.5 & 0.21 & 378 & 174 \\ 
-1910 & 0.10 & 1.7 & 2.5 & 0.84 & 394 & 1106 \\ 
-2669 & 0.10 & 1.7 & 2.5 & 1.05 & 391 & 809 \\ 
-2733 & 0.10 & 1.7 & 2.5 & 1.26 & 366 & 551 \\ 
-2499 & 0.10 & 1.7 & 2.5 & 1.47 & 345 & 291 \\ 
-2119 & 0.10 & 1.7 & 2.5 & 1.68 & 334 & 159 \\ 
-1699 & 0.10 & 1.7 & 2.5 & 1.88 & 329 & 95 \\ 
-1247 & 0.10 & 1.7 & 2.5 & 2.09 & 322 & 61 \\ 
-2107 & 0.10 & 1.7 & 2.5 & 2.93 & 372 & 271 \\ 
-1634 & 0.10 & 1.7 & 2.5 & 3.14 & 394 & 845 \\ 
-2340 & 0.10 & 1.7 & 2.5 & 3.35 & 411 & 715 \\ 
-1163 & 0.10 & 1.7 & 2.5 & 4.61 & 439 & 10 \\ 
-1268 & 0.10 & 1.7 & 2.5 & 4.82 & 419 & 11 \\ 
-1297 & 0.10 & 1.7 & 2.5 & 5.03 & 407 & 13 \\ 
-1230 & 0.10 & 1.7 & 2.5 & 5.24 & 388 & 17 \\ 
-1123 & 0.10 & 1.7 & 2.5 & 5.45 & 371 & 20 \\ 
-1565 & 0.10 & 3.0 & 4.5 & 3.98 & 66 & 146 \\ 
-1920 & 0.10 & 3.0 & 4.5 & 4.19 & 66 & 110 \\ 
-1888 & 0.10 & 3.0 & 4.5 & 4.40 & 62 & 62 \\ 
-1687 & 0.10 & 3.0 & 4.5 & 4.61 & 59 & 36 \\ 
-1418 & 0.10 & 3.0 & 4.5 & 4.82 & 58 & 22 \\ 
-1098 & 0.10 & 3.0 & 4.5 & 5.03 & 57 & 13 \\ 
-1157 & 0.10 & 5.0 & 7.5 & 0.21 & 13 & 22 \\ 
-1374 & 0.10 & 5.0 & 7.5 & 0.42 & 13 & 17 \\ 
-1357 & 0.10 & 5.0 & 7.5 & 0.63 & 12 & 11 \\ 
-1231 & 0.10 & 5.0 & 7.5 & 0.84 & 12 & 7 \\ 
-1057 & 0.10 & 5.0 & 7.5 & 1.05 & 12 & 4 \\ 
-2846 & 0.25 & 1.7 & 2.5 & 0.00 & 348 & 431 \\ 
-2246 & 0.25 & 1.7 & 2.5 & 0.42 & 327 & 711 \\ 
-2175 & 0.25 & 1.7 & 2.5 & 0.84 & 4038709 & 429961 \\ 
-1939 & 0.25 & 1.7 & 2.5 & 1.05 & 833 & 90286 \\ 
-3556 & 0.25 & 1.7 & 2.5 & 1.26 & 309 & 1393 \\ 
-3436 & 0.25 & 1.7 & 2.5 & 1.47 & 286 & 676 \\ 
-3000 & 0.25 & 1.7 & 2.5 & 1.68 & 263 & 360 \\ 
-2481 & 0.25 & 1.7 & 2.5 & 1.88 & 259 & 209 \\ 
-1912 & 0.25 & 1.7 & 2.5 & 2.09 & 257 & 134 \\ 
-1257 & 0.25 & 1.7 & 2.5 & 2.30 & 271 & 92 \\ 
-2865 & 0.25 & 1.7 & 2.5 & 2.72 & 317 & 459 \\ 
-3149 & 0.25 & 1.7 & 2.5 & 2.93 & 345 & 848 \\ 
-3072 & 0.25 & 1.7 & 2.5 & 3.14 & 382 & 2044 \\ 
-2561 & 0.25 & 1.7 & 2.5 & 3.35 & 436 & 1276 \\ 
-2409 & 0.25 & 1.7 & 2.5 & 3.56 & 482 & 340 \\ 
-2230 & 0.25 & 1.7 & 2.5 & 3.77 & 431961 & 113040 \\ 
-1115 & 0.25 & 1.7 & 2.5 & 4.19 & 555 & 25 \\ 
-1506 & 0.25 & 1.7 & 2.5 & 4.40 & 545 & 25 \\ 
-1760 & 0.25 & 1.7 & 2.5 & 4.61 & 513 & 27 \\ 
-1897 & 0.25 & 1.7 & 2.5 & 4.82 & 477 & 29 \\ 
-1913 & 0.25 & 1.7 & 2.5 & 5.03 & 427 & 31 \\ 
-1813 & 0.25 & 1.7 & 2.5 & 5.24 & 387 & 35 \\ 
-1566 & 0.25 & 1.7 & 2.5 & 5.45 & 342 & 43 \\ 
-1088 & 0.25 & 1.7 & 2.5 & 5.65 & 306 & 55 \\ 
-1975 & 0.25 & 1.7 & 2.5 & 6.07 & 402 & 295 \\ 
-1866 & 0.25 & 3.0 & 4.5 & 0.00 & 70 & 77 \\ 
-1009 & 0.25 & 3.0 & 4.5 & 1.05 & 94 & 4 \\ 
-1246 & 0.25 & 3.0 & 4.5 & 1.26 & 91 & 5 \\ 
-1385 & 0.25 & 3.0 & 4.5 & 1.47 & 85 & 5 \\ 
-1429 & 0.25 & 3.0 & 4.5 & 1.68 & 78 & 5 \\ 
-1392 & 0.25 & 3.0 & 4.5 & 1.88 & 70 & 6 \\ 
-1268 & 0.25 & 3.0 & 4.5 & 2.09 & 63 & 7 \\ 
-1035 & 0.25 & 3.0 & 4.5 & 2.30 & 56 & 9 \\ 
-2516 & 0.25 & 3.0 & 4.5 & 4.19 & 58 & 286 \\ 
-2574 & 0.25 & 3.0 & 4.5 & 4.40 & 51 & 141 \\ 
-2336 & 0.25 & 3.0 & 4.5 & 4.61 & 48 & 78 \\ 
-1999 & 0.25 & 3.0 & 4.5 & 4.82 & 46 & 46 \\ 
-1622 & 0.25 & 3.0 & 4.5 & 5.03 & 46 & 29 \\ 
-1198 & 0.25 & 3.0 & 4.5 & 5.24 & 46 & 20 \\ 
-1446 & 0.25 & 5.0 & 7.5 & 0.00 & 11 & 43 \\ 
-1732 & 0.25 & 5.0 & 7.5 & 0.21 & 11 & 50 \\ 
-1889 & 0.25 & 5.0 & 7.5 & 0.42 & 11 & 37 \\ 
-1861 & 0.25 & 5.0 & 7.5 & 0.63 & 10 & 23 \\ 
-1701 & 0.25 & 5.0 & 7.5 & 0.84 & 10 & 14 \\ 
-1475 & 0.25 & 5.0 & 7.5 & 1.05 & 9 & 9 \\ 
-1213 & 0.25 & 5.0 & 7.5 & 1.26 & 9 & 6 \\ 
-1069 & 0.25 & 5.0 & 7.5 & 3.98 & 17 & 1 \\ 
-1092 & 0.25 & 5.0 & 7.5 & 4.19 & 15 & 1 \\ 
-1062 & 0.25 & 5.0 & 7.5 & 4.40 & 14 & 1 \\ 
-1081 & 0.05 & 1.7 & 2.9 & 4.19 & 249 & 133 \\ 
-1213 & 0.05 & 1.7 & 2.9 & 4.40 & 251 & 108 \\ 
-1222 & 0.05 & 1.7 & 2.9 & 4.61 & 247 & 83 \\ 
-1081 & 0.05 & 1.7 & 2.9 & 4.82 & 250 & 53 \\ 
-1001 & 0.10 & 1.7 & 2.9 & 1.88 & 275 & 15 \\ 
-1400 & 0.10 & 1.7 & 2.9 & 4.19 & 229 & 244 \\ 
-1646 & 0.10 & 1.7 & 2.9 & 4.40 & 235 & 194 \\ 
-1646 & 0.10 & 1.7 & 2.9 & 4.61 & 232 & 146 \\ 
-1492 & 0.10 & 1.7 & 2.9 & 4.82 & 234 & 101 \\ 
-1219 & 0.10 & 1.7 & 2.9 & 5.03 & 231 & 68 \\ 
-1015 & 0.10 & 3.0 & 5.1 & 1.68 & 39 & 38 \\ 
-1174 & 0.10 & 3.0 & 5.1 & 1.88 & 40 & 32 \\ 
-1187 & 0.10 & 3.0 & 5.1 & 2.09 & 40 & 24 \\ 
-1102 & 0.10 & 3.0 & 5.1 & 2.30 & 40 & 18 \\ 
-1035 & 0.25 & 1.7 & 2.9 & 0.21 & 282 & 134 \\ 
-1813 & 0.25 & 1.7 & 2.9 & 0.42 & 300 & 293 \\ 
-1207 & 0.25 & 1.7 & 2.9 & 1.26 & 331 & 19 \\ 
-1383 & 0.25 & 1.7 & 2.9 & 1.47 & 318 & 21 \\ 
-1467 & 0.25 & 1.7 & 2.9 & 1.68 & 304 & 23 \\ 
-1459 & 0.25 & 1.7 & 2.9 & 1.88 & 283 & 26 \\ 
-1358 & 0.25 & 1.7 & 2.9 & 2.09 & 258 & 32 \\ 
-1150 & 0.25 & 1.7 & 2.9 & 2.30 & 235 & 41 \\ 
-1397 & 0.25 & 1.7 & 2.9 & 3.98 & 178 & 428 \\ 
-2095 & 0.25 & 1.7 & 2.9 & 4.19 & 191 & 424 \\ 
-2299 & 0.25 & 1.7 & 2.9 & 4.40 & 191 & 349 \\ 
-2297 & 0.25 & 1.7 & 2.9 & 4.61 & 193 & 276 \\ 
-2131 & 0.25 & 1.7 & 2.9 & 4.82 & 190 & 199 \\ 
-1856 & 0.25 & 1.7 & 2.9 & 5.03 & 191 & 146 \\ 
-1495 & 0.25 & 1.7 & 2.9 & 5.24 & 188 & 106 \\ 
-1032 & 0.25 & 1.7 & 2.9 & 5.45 & 199 & 79 \\ 
-1219 & 0.25 & 1.7 & 2.9 & 6.07 & 237 & 345 \\ 
-1033 & 0.25 & 3.0 & 5.1 & 1.47 & 30 & 67 \\ 
-1440 & 0.25 & 3.0 & 5.1 & 1.68 & 32 & 66 \\ 
-1616 & 0.25 & 3.0 & 5.1 & 1.88 & 33 & 57 \\ 
-1622 & 0.25 & 3.0 & 5.1 & 2.09 & 33 & 45 \\ 
-1516 & 0.25 & 3.0 & 5.1 & 2.30 & 33 & 34 \\ 
-1336 & 0.25 & 3.0 & 5.1 & 2.51 & 33 & 25 \\ 
-1095 & 0.25 & 3.0 & 5.1 & 2.72 & 33 & 19 \\ 
-1039 & 0.25 & 3.0 & 5.1 & 5.24 & 54 & 4 \\ 
-1085 & 0.25 & 3.0 & 5.1 & 5.45 & 51 & 4 \\ 
-1072 & 0.25 & 3.0 & 5.1 & 5.65 & 48 & 5 \\ 
-1005 & 0.25 & 3.0 & 5.1 & 5.86 & 44 & 6 \\ 
-1117 & 0.25 & 5.0 & 8.5 & 4.82 & 6 & 10 \\ 
-1163 & 0.25 & 5.0 & 8.5 & 5.03 & 6 & 9 \\ 
-1124 & 0.25 & 5.0 & 8.5 & 5.24 & 7 & 7 \\ 
-1027 & 0.25 & 5.0 & 8.5 & 5.45 & 7 & 5 \\ 
-1055 & 0.10 & 1.7 & 3.2 & 1.26 & 161 & 101 \\ 
-1099 & 0.10 & 1.7 & 3.2 & 1.47 & 165 & 83 \\ 
-1055 & 0.10 & 1.7 & 3.2 & 1.68 & 165 & 67 \\ 
-1216 & 0.25 & 1.7 & 3.2 & 1.05 & 125 & 191 \\ 
-1427 & 0.25 & 1.7 & 3.2 & 1.26 & 130 & 178 \\ 
-1489 & 0.25 & 1.7 & 3.2 & 1.47 & 133 & 151 \\ 
-1439 & 0.25 & 1.7 & 3.2 & 1.68 & 138 & 127 \\ 
-1297 & 0.25 & 1.7 & 3.2 & 1.88 & 139 & 103 \\ 
-1082 & 0.25 & 1.7 & 3.2 & 2.09 & 144 & 82 \\ 
-1041 & 0.25 & 1.7 & 3.2 & 4.61 & 210 & 23 \\ 
-1077 & 0.25 & 1.7 & 3.2 & 4.82 & 202 & 26 \\ 
-1052 & 0.25 & 1.7 & 3.2 & 5.03 & 191 & 30 \\ 
-1049 & 0.25 & 3.0 & 5.7 & 5.86 & 23 & 27 \\ 
-1049 & 0.25 & 3.0 & 5.7 & 6.07 & 23 & 23 \\ 
+Velocity (km/s) & $M_{2}/M_{1}$ & BH Axis (pc) & Min Dist. (pc) & BH $\Phi$ (rad) & $\gamma_{1}$ & $\gamma_{2}$  \\
+1124 & 0.25 & 5.0 & 8.5 & 5.24 & 650 & 692 \\
+2336 & 0.25 & 3.0 & 4.5 & 4.61 & 4771 & 7768 \\
+3436 & 0.25 & 1.7 & 2.5 & 1.47 & 28584 & 67621 \\
 \end{tabular}
 \end{table}
-\ref{key} hghgh
+\ref{results} hghgh
 
 \section{A Close Pass of a GC with a SMBBH}
 

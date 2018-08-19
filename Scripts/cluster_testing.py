@@ -38,12 +38,16 @@ def plummer(mass, radius, N):
 
     gravity.particles.add_particles(pm)
 
-    print pm[0].position
-    while gravity.model_time < 10000 | units.yr:
-        gravity.evolve_model(gravity.model_time + (1000 | units.yr))
-    print pm[0].position
+    print 'position of pm[0] before gravity evolution: ',pm[0].position
+    print 'velocity of pm[0] before gravity evolution: ',pm[0].velocity
+    while gravity.model_time < 1000000 | units.yr:
+        print pm[0].position
+        gravity.evolve_model(gravity.model_time + (100000 | units.yr))
+    print 'position of pm[0] after gravity evolution: ',pm[0].position
+    print 'velocity of pm[0] after gravity evolution: ',pm[0].velocity
     gravity.stop()
-    print pm.center_of_mass_velocity()
-    plt.scatter(pm.x.value_in(units.parsec), pm.y.value_in(units.parsec))
-    plt.show()
+    
+    
+    #plt.scatter(pm.x.value_in(units.parsec), pm.y.value_in(units.parsec))
+    #plt.show()
 plummer(mass, radius, N)

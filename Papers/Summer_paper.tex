@@ -46,8 +46,22 @@ L = v_{\infty}b = v_{c}r_{c}
 \begin{equation}
 b = r_{c}\sqrt{1+\frac{GM_{BH}}{r_{c}v_{\infty}^2}}
 \end{equation}
-Where $v_{\infty}$ is the GC initial velocity far from the black hole binary, $v_{c}$ is the GC velocity at closest approach, G is the gravitational constant, $M_{BH}$ is the total mass of the black hole binary, $r_{c}$ is the GC's closest approach to the BBH center of mass, and b is the impact parameter.  In addition, an unvaried $v_{\infty}$ and $M_{BH}$ were chosen as 500 km/s and $7 \times 10^9 M_{\odot}$ respectively. So, by asserting a distance of closest approach, AMUSE will generate a simulation in which the GC falls towards the SMBBH, undergo a prograde planar interaction, and then have the GC's exit velocity recorded once it reaches 120 pc away from the BBH. 
+Where $v_{\infty}$ is the GC initial velocity far from the black hole binary, $v_{c}$ is the GC velocity at closest approach, G is the gravitational constant, $M_{BH}$ is the total mass of the black hole binary, $r_{c}$ is the GC's closest approach to the BBH center of mass, and b is the impact parameter.  In addition, an unvaried $v_{\infty}$ and $M_{BH}$ were chosen as 500 km/s and $7 \times 10^9 M_{\odot}$ respectively. So, by asserting a distance of closest approach, AMUSE will generate a simulation in which the GC falls towards the SMBBH, undergo a prograde planar interaction, and then have the GC's ejection velocity recorded once it reaches 120 pc away from the BBH. 
 
+\subsection{Mirroring HVGC-1}
+By examining the galactic potential of M87, a rough estimate can be made for the necessary ejection velocity of an object recorded at 120 pc from the galactic center in order to possess a velocity of 2300 km/s at a significantly further radial distance. Assuming a power-law density model where the mass density behaves as $\rho(r) = \rho_{o}(r_{o}/r)^\alpha$ and the mass within radius r is $M(r) = (4\pi G\rho_{o}r_{o}^\alpha r^{3-\alpha})/(3-\alpha)$, the potential difference at two different radii can be calculated:
+\begin{equation}
+\Phi(r) - \Phi(r_{o}) = G\int_{r_{o}}^{r} \! \frac{M(r')}{r'^2} \, \mathrm{d}r' = \frac{4\pi G\rho_{o}r_{o}^\alpha }{3-\alpha} r^{3-\alpha}
+\end{equation}
+We take $\alpha$ to be equal to 2 under the assumption the potential varies in a logarithmic fashion. This is acceptable for this order-of-magnitude estimation, although it has been noted that more complicated multi-moment potentials may be present in and around M87 \citep{mur14}. So,
+\begin{equation}
+ %= \frac{v_{c}^{2}(r_{o}) - v_{c}^{2}(r)}{\alpha - 2} for \alpha \neq 2
+ \Delta\Phi= v_{c}^{2}ln(r/r_{o})
+\end{equation}
+Where $v_{c}$ is the circular velocity, which I take here to be equivalent to the velocity dispersion of M87: 500 km/s, r is the distance from M87 at which HVGC-1 is thought to be, $\gg$85 kpc, and $r_{o}$ is the distance from the galactic center at which my simulation ends and records an ejection velocity, 120 pc. By setting the change in kinetic energy equal to equation 5, we find the ejection velocity at 120 pc to be
+\begin{equation}
+v_{o} = \sqrt{v_{r}^2 + 2v_{c}^{2}ln\bigg(\frac{r}{120 pc}\bigg)}
+\end{equation}
 \subsection{Cluster Exit Velocity and BH Phase Dependence}
 The cluster's exit velocity depends heavily on the location of the black holes during its closest approach to the binary. In order to determine the ideal location of the BH's during the interaction, the simulation was repeated while varying the initial phase of the black holes. This is analogous to varying the BH phase during closest approach. The result: a BH phase dependent exit velocity that clearly shows two peaks corresponding to the cluster arriving at the SMBBH while the outer and inner BH are in phase with it, see Figure 1.
 %\begin{figure}
@@ -73,8 +87,11 @@ Interestingly, some BH phases result in the test particle becoming captured by t
 \end{figure}
 \subsection{Operational Parameters}
 So, the operational parameters of this prograde planar interaction were BH mass ratio, the separation of the BHs, the GC's closest approach, and BH phase. These values were varied to explore the parameter space in an attempt to determine the combination that resulted in the highest GC exit velocity and smallest tidal perturbation: $\gamma = {a_{t}}/{a_i}$ where $a_{t}$ is the tidal acceleration of the GC due to the presence of the external BH gravity well and $a_{i}$ is the internal acceleration of the GC. A small tidal perturbation implies a higher likelihood of a significant fraction of the star cluster surviving the interaction. To explore a large range of parameter space, the following were chosen: BH mass ratio [0.01, 0.05, 0.1, 0.25], BH Axis (pc) [1.7, 3.0, 5.0], GC closest approach (number of times greater than the BH Axis) [1.5, 2, 2.5]. With each combination of parameters, the interaction was repeated with initial BH phases varying by steps in $\pi/15$ such that the most optimum orientation of the BHs can be isolated and investigated further. 
+
 \subsection{Optimum Interaction}
-In total, 1,080 simulations were run and only 147 resulted in an GC exit velocity exceeding 1000 km/s, satisfying the "hypervelocity" condition. Of the 147, I chose three that were of particular interest, see Table \ref{results}. The first interaction listed has the highest velocity to tidal perturbation ratio out of all of the interactions, meaning the largest GC exit velocity and the smallest tidal acceleration experienced by the GC. The second interaction listed has the highest velocity to perturbation ratio for an event resulting in a velocity $>$2000 km/s. The third has the highest ratio for an interaction with a $>$3000 km/s exit velocity. Notice, all three interaction involve a BBH mass ratio of 0.25, as did the majority of the 147 hypervelocity interactions (63$\%$). The higher mass ratio allows the GC to receive a substantial velocity kick while remaining further away from the black hole binary, resulting in a lower tidal perturbation. Although, to describe the tidal perturbation as "low" would be to misrepresent the nature of the encounter. Even in the ideal scenario (the first interaction in Table \ref{results}), the tides experienced by the GC due to the presence of BH masses $M_{1}$ and $M_{2}$ reach a respective maximum at 650 and 693 times the internal acceleration of the star cluster. This highlights the extraordinary nature of the encounter, and implies that the cluster will almost certainly be torn apart unless the tidal ratio remains high for a brief enough time period.
+In total, 1,080 simulations were run and only 147 resulted in an GC test-particle exit velocity exceeding 1000 km/s, satisfying the "hypervelocity" condition. Each interaction also recorded the tidal perturbation experienced. Of the 147, I chose three that were of particular interest, see Table \ref{results}. The first interaction listed has the highest velocity to tidal perturbation ratio out of all of the interactions, meaning the largest test-particle exit velocity and the smallest tidal perturbation experienced. The second interaction listed has the highest velocity to perturbation ratio for an event resulting in a velocity $>$2000 km/s. The third has the highest ratio for an interaction with a $>$3000 km/s exit velocity. Notice, all three interaction involve a BBH mass ratio of 0.25, as did the majority of the 147 hypervelocity interactions (63$\%$). In fact, there were zero interaction that resulted in a hypervelocity exit by the test particle for a BH mass ratio of 0.01. A higher mass ratio allows the GC to receive a substantial velocity kick while remaining further away from the black hole binary, resulting in a lower tidal perturbation.  Although, to describe the tidal perturbation as "low" would be to misrepresent the nature of the encounter. Even in the ideal scenario (the first interaction in Table \ref{results}), the tides experienced by the GC due to the presence of BH masses $M_{1}$ and $M_{2}$ reach a respective maximum at 650 and 693 times the internal acceleration of the star cluster. This highlights the extraordinary nature of the encounter, and implies that the cluster will almost certainly be torn apart unless the tidal ratio remains high for a brief enough time period. The encounter that is most capable of mirroring HVGC-1's current behavior is the third entry in Table \ref{results}, where the star cluster briefly experiences a tidal acceleration 67,621 times its internal acceleration. These two interactions were chosen for further analysis as the first satisfies the condition of the production of a hypervelocity object, and the second satisfies initial velocity conditions necessary for HVGC-1's extraordinary behavior. The "ideal-ness" of these three encounters can be refined in the future. However, in my opinion, doing so would reduce an already unlikely scenario down to a near impossible set of perfect circumstances. For the purposes of determining the survivability of a star cluster, these "ball-park" parameters will suffice. 
+\subsection{Comparison to HVGC-1}
+The object highlighted in \citet{cald14} was determined to be traveling at {\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}2300 km/s outwards from M87 at a distance of 84 kpc
 \begin{table}
 \centering
 \caption{Interactions of interest. Columns from left to right: Exit velocity of the GC 120 pc away from the BBH, mass ratio of the black holes, BH separation distance, Minimum distance from the binary center of mass achieved by the GC, Initial BH phase, Maximum tidal perturbation experienced by the GC due to $M_{1}$ (more massive component), Maximum tidal perturbation due to $M_{2}$. \label{results}}
@@ -84,12 +101,12 @@ In total, 1,080 simulations were run and only 147 resulted in an GC exit velocit
 Velocity (km/s) & $M_{2}/M_{1}$ & BH Axis (pc) & Min Dist. (pc) & BH $\Phi$ (rad) & $\gamma_{1}$ & $\gamma_{2}$  \\
 1124 & 0.25 & 5.0 & 8.5 & 5.24 & 650 & 692 \\
 2336 & 0.25 & 3.0 & 4.5 & 4.61 & 4771 & 7768 \\
-3436 & 0.25 & 1.7 & 2.5 & 1.47 & 28584 & 67621 \\
+3000 & 0.25 & 1.7 & 2.5 & 1.68 & 26316 & 36027 \\
 \end{tabular}
 \end{table}
-\ref{results} hghgh
 
 \section{A Close Pass of a GC with a SMBBH}
+To determine a cluster's ability to survive, the test particle must be extended to a self-gravitating particle cluster.  and reasserting the ideal parameters determined  repeating the 
 
 \begin{thebibliography}{}
 \bibitem[Caldwell et al.(2014)]{cald14} 
@@ -98,6 +115,8 @@ Caldwell, N., Strader, J., Romanowsky, A. J., et al. 2014, \apjl, 787, L11
 Gebhardt, K., Adams, J. Richstone, D., et al. 2011, \apj, 729, 13
 \bibitem[Holley-Bockelmann et al.(2005)]{hol05}
 Holley-Bockelmann et al. 2005, \apjl
+\bibitem[Murphy, J., Gebhardt, K., Craidt, M.(2014)]{mur14}
+Murphy, J., Gebhardt, K., Craidt, M. 2014, \apj
 \bibitem[Sesana et al.(2008)]{ses08}
 Sesana, A., Haardt, F., Madau, P. 2008, \apj, 686
 \bibitem[Samsing(2015)]{sam15}

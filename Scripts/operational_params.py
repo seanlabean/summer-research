@@ -12,13 +12,13 @@ import time
 #Maybe import *?
 
 #import numpy as np
-bbh_mass_ratio = [0.05, 0.1, 0.25]
-#bbh_mass_ratio = [0.1]
-#bbh_separation = [1.7] | units.parsec
-bbh_separation = [1.7, 3, 5] | units.parsec
-gc_closest_ratio = [1.5, 1.7, 1.9]
-#gc_closest_ratio = [1.5, 2.5] 
-phase_step = np.pi/15
+#bbh_mass_ratio = [0.05, 0.1, 0.25]
+bbh_mass_ratio = [0.1]
+bbh_separation = [1.7] | units.parsec
+#bbh_separation = [1.7, 3, 5] | units.parsec
+#gc_closest_ratio = [1.5, 1.7, 1.9]
+gc_closest_ratio = [1.5, 2.5] 
+phase_step = np.pi/4
 #bbh_phase = np.arange(0, 2*np.pi, phase_step)
 #bbh_phase = bbh_phase.tolist()
 #particles = bbh_hvgc(bbh_mass, mass_ratio, bbh_separation, bbh_phase, gc_closest_ratio, gc_inf)
@@ -48,8 +48,8 @@ def operational_params(bbh_mass_ratio, bbh_separation,  gc_closest_ratio, bbh_ph
     return vel_list, phase_list
 
 start_time = time.time()
-table_data = 'results_table.txt'
-script_data = 'results_script.txt'
+table_data = 'results_table_test.txt'
+script_data = 'results_script_test.txt'
 table = open('./Text/'+table_data, "w+")
 raw = open('./Text/'+script_data, "w+")
 count = 1

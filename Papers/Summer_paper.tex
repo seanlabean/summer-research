@@ -51,17 +51,29 @@ Where $v_{\infty}$ is the GC initial velocity far from the black hole binary, $v
 \subsection{Mirroring HVGC-1}
 By examining the galactic potential of M87, a rough estimate can be made for the necessary ejection velocity of an object recorded at 120 pc from the galactic center in order to possess a velocity of 2300 km/s at a significantly further radial distance. Assuming a power-law density model where the mass density behaves as $\rho(r) = \rho_{o}(r_{o}/r)^\alpha$ and the mass within radius r is $M(r) = (4\pi G\rho_{o}r_{o}^\alpha r^{3-\alpha})/(3-\alpha)$, the potential difference at two different radii can be calculated:
 \begin{equation}
-\Phi(r) - \Phi(r_{o}) = G\int_{r_{o}}^{r} \! \frac{M(r')}{r'^2} \, \mathrm{d}r' = \frac{4\pi G\rho_{o}r_{o}^\alpha }{3-\alpha} r^{3-\alpha}
+\Phi(r) - \Phi(r_{o}) = G\int_{r_{o}}^{r} \! \frac{M(r')}{r'^2} \, \mathrm{d}r' = \frac{4\pi G\rho_{o}r_{o}^\alpha }{3-\alpha} r^{3-\alpha}\int_{r_{o}}^{r} \! r'^{1-\alpha} \, \mathrm{d}r'
 \end{equation}
-We take $\alpha$ to be equal to 2 under the assumption the potential varies in a logarithmic fashion. This is acceptable for this order-of-magnitude estimation, although it has been noted that more complicated multi-moment potentials may be present in and around M87 \citep{mur14}. So,
+We take $\alpha$ to be equal to 2 under the assumption the mass density of the galaxy is proportional to $r^{-2}$. This is acceptable for this order-of-magnitude estimation, although it has been noted that more complicated multi-moment potentials may be present in and around M87 \citep{mur14}. So,
 \begin{equation}
  %= \frac{v_{c}^{2}(r_{o}) - v_{c}^{2}(r)}{\alpha - 2} for \alpha \neq 2
  \Delta\Phi= v_{c}^{2}ln(r/r_{o})
 \end{equation}
-Where $v_{c}$ is the circular velocity, which I take here to be equivalent to the velocity dispersion of M87: 500 km/s, r is the distance from M87 at which HVGC-1 is thought to be, $\gg$85 kpc, and $r_{o}$ is the distance from the galactic center at which my simulation ends and records an ejection velocity, 120 pc. By setting the change in kinetic energy equal to equation 5, we find the ejection velocity at 120 pc to be
+Where $v_{c}$ is the circular velocity, which I take here to be equivalent to the velocity dispersion of M87: 500 km/s, r is the distance from M87 at which HVGC-1 is thought to be, $\gg$85 kpc, and $r_{o}$ is the distance from the galactic center at which my simulation ends and records an ejection velocity, 120 pc. By setting the change in kinetic energy equal to equation 5, we find the ejection velocity at 120 pc to be:
 \begin{equation}
 v_{o} = \sqrt{v_{r}^2 + 2v_{c}^{2}ln\bigg(\frac{r}{120 pc}\bigg)}
 \end{equation}
+%\begin{figure}
+%\figurenum{1}
+%\plotone{./Images/velocity_behavior.png}
+%\caption{text}
+%\end{figure}
+\begin{figure}
+\figurenum{1}
+\includegraphics[scale=0.7]{./Images/velocity_behavior.png}
+\centering
+\caption{text}
+\end{figure}
+Based on my rough estimation of the potential well of M87, an object's exit velocity (recorded in my simulation at 120pc away from the SMBBH) on the order of 3000 km/s is necessary for an observed velocity of 2300 km/s at the estimated distance of HVGC-1. Any exit velocity less than {\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}2100 km/s will result in the object being incapable of reaching a distance of 1Mpc, and will be still bound to M87. I will explore parameters of the binary black hole system that will permit a significant exit velocity as well as examine specific scenarios that will allow for a star cluster to survive the interaction and exhibit velocities similar to those observed in \citet{cald14}.
 \subsection{Cluster Exit Velocity and BH Phase Dependence}
 The cluster's exit velocity depends heavily on the location of the black holes during its closest approach to the binary. In order to determine the ideal location of the BH's during the interaction, the simulation was repeated while varying the initial phase of the black holes. This is analogous to varying the BH phase during closest approach. The result: a BH phase dependent exit velocity that clearly shows two peaks corresponding to the cluster arriving at the SMBBH while the outer and inner BH are in phase with it, see Figure 1.
 %\begin{figure}
@@ -73,14 +85,14 @@ The cluster's exit velocity depends heavily on the location of the black holes d
 Interestingly, some BH phases result in the test particle becoming captured by the binary black hole system. An easy check to confirm a gravity capture is taking place (as opposed to some odd unintended consequence within the AMUSE code) is to investigate the test particle's energy during the interaction. It would be expected that the particle's total energy relative to the center of mass of the system is a conserved quantity, that is, until a close pass with the SMBBH whereafter the particle's energy will be lower. Indeed, this is what is observed, see Figure 2. For comparison, an interaction that results in the ejection of the GC will have the GC's relative energy also remain constant as it infalls towards the SMBBH, then have a positive shift after the interaction, see Figure 3. Interactions that result in a captured GC test particle were discarded and not considered further as this investigation focuses only on the possibility of a GC being ejected at greater than 1000 km/s, but such interactions may be useful for further simulations regarding stellar or more complex structure capture by binary black holes.
 
 \begin{figure}
-\figurenum{1}
+\figurenum{2}
 \plottwo{./Images/bound_track.png}{./Images/bound_energy.png}
 
 \caption{Left: The globular cluster (red path) begins its path at the bottom right at (38 pc, -100 pc) and begins infalling towards the black hole binary (black path: more massive BH, blue path: less massive BH. Notice how the GC appears to be tracing a path that is beginning to turn back around towards the SMBBH. Right: The relative energy, in Joules, of the globular cluster during throughout its journey towards, around, and away from the SMBBH. The oscillation and large spike are due to the gravitational potential close to the SMBBH becomes more significantly more complex than the assumed point mass viewed from infinity. Here, the GC begins at -3.15E48 J of relative energy and ends with -4.42E48 J, a 40.3\% decrease in energy relative to the center of mass of the system.}
 \end{figure}
 
 \begin{figure}
-\figurenum{2}
+\figurenum{3}
 \plottwo{./Images/unbound_track.png}{./Images/unbound_energy.png}
 
 \caption{Left: All initial conditions are equal to those in Figure 1 except for the location of the black holes in their orbit during the GC's closest pass. Notice, the GC (red line) makes a much more direct path away from the SMBBH than in Figure 1. Right: After its interaction with the SMBBH, the GC has gained relative energy and has been ejected from the system. Here, the GC begins with -3.15E48 J of energy (the same as in Figure 1) and ends with +1.94E48 J, a 161.6\% increase in energy.}
@@ -101,7 +113,7 @@ The object highlighted in \citet{cald14} was determined to be traveling at {\rai
 Velocity (km/s) & $M_{2}/M_{1}$ & BH Axis (pc) & Min Dist. (pc) & BH $\Phi$ (rad) & $\gamma_{1}$ & $\gamma_{2}$  \\
 1124 & 0.25 & 5.0 & 8.5 & 5.24 & 650 & 692 \\
 2336 & 0.25 & 3.0 & 4.5 & 4.61 & 4771 & 7768 \\
-3000 & 0.25 & 1.7 & 2.5 & 1.68 & 26316 & 36027 \\
+3436 & 0.25 & 1.7 & 2.5 & 1.47 & 28584 & 67621 \\
 \end{tabular}
 \end{table}
 

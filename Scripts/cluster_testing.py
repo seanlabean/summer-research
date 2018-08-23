@@ -35,16 +35,15 @@ def plummer(mass, radius, N):
     gravity = ph4(conv)
     pm.positon = pm.position + ((100, 100, 100) | units.parsec)
     pm.velocity= pm.velocity + ((-1000, -1000, -1000) | (units.km/units.s))
-
-    gravity.particles.add_particles(pm)
-
-    print 'position of pm[0] before gravity evolution: ',pm[0].position
-    print 'velocity of pm[0] before gravity evolution: ',pm[0].velocity
-    while gravity.model_time < 1000000 | units.yr:
-        print pm[0].position
-        gravity.evolve_model(gravity.model_time + (100000 | units.yr))
-    print 'position of pm[0] after gravity evolution: ',pm[0].position
-    print 'velocity of pm[0] after gravity evolution: ',pm[0].velocity
+    lr, mf = pm.LagrangianRadii(unit_converter=conv)
+    print lr, mf
+    #print 'position of pm[0] before gravity evolution: ',pm[0].position
+    #print 'velocity of pm[0] before gravity evolution: ',pm[0].velocity
+    #while gravity.model_time < 1000000 | units.yr:
+        #print gravity.particles[0].position
+        #gravity.evolve_model(gravity.model_time + (100000 | units.yr))
+    #print 'position of pm[0] after gravity evolution: ',pm[0].position
+    #print 'velocity of pm[0] after gravity evolution: ',pm[0].velocity
     gravity.stop()
     
     

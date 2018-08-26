@@ -1,7 +1,8 @@
 from amuse.lab import *
 import matplotlib.pyplot as pyplot
 import numpy as np
-cluster = read_set_from_file('./Text/Cluster/cluster_set.hdf5',format='hdf5')
+from cluster_hop_automated import execute_hop
+cluster = read_set_from_file('./Text/Cluster_Trials/1pc/3000kms2Myr_end.hdf5',format='hdf5')
 
 cluster_total_E = cluster.kinetic_energy() + cluster.potential_energy()
 cluster_total_M = cluster.mass.sum()
@@ -9,7 +10,7 @@ conv = nbody_system.nbody_to_si(cluster_total_M, cluster_total_E)
 print cluster.LagrangianRadii(conv)
 hop = Hop(unit_converter=conv)
 
-hop.parameters.number_of_neighbors_for_hop = 10
+hop.parameters.number_of_neighbors_for_hop = 8
 hop.parameters.number_of_particles_per_group_pair_boundary = 2
 hop.relative_saddle_density_threshold = True
 hop.set_relative_saddle_density_threshold(True)
@@ -48,6 +49,15 @@ def plot_clumps(groups, total_mass):
             facecolors = color,
             label = "{:.2F}".format(fraction_of_mass_in_group[index])
         )
+        subplot.scatter(
+            group.center_of_mass().x.value_in(units.parsec), 
+            group.center_of_mass().y.value_in(units.parsec),
+            marker='o',
+            s=30,
+            edgecolors = color,
+            facecolors = color,
+            label = "CoM"
+        )
 
     #subplot.set_xlim(0,1)
     #subplot.set_ylim(0,1)
@@ -74,9 +84,31 @@ def vector_norm(vector):
     return norm
 
 groups = [x.get_intersecting_subset_in(cluster) for x in hop.groups()]
-#plot_clumps(groups,cluster_total_M)
+plot_clumps(groups,cluster_total_M)
 for group in groups:
     print group.mass.sum().in_(units.MSun)
     print vector_norm(group.center_of_mass_velocity().in_(units.kms))
     print group.LagrangianRadii(conv)[0][5].in_(units.parsec), group.LagrangianRadii(conv)[1][5]
 hop.stop()
+def evolve_group(group, end_time):
+    group_conv = nbody_system.nbody_to_si(group.mass.sum(), group.center_of_mass().length())
+    gravity = ph4(group_conv)
+    gravity.particles.add_particles(group)
+
+    lr1 = []
+    lr2 = []
+    time = []
+    while gravity.model_time < end_time:
+        gravity.evolve_model(gravity.model_time + (1000 | units.yr))
+        lr, mf = gravity.particles.LagrangianRadii(group_conv)
+        time.append(gravity.model_time.value_in(units.yr))
+        lr1.append(lr[0].value_in(units.parsec))
+        lr2.append(lr[1].value_in(units.parsec))
+    pyplot.scatter(gravity.particles.x.value_in(units.parsec), gravity.particles.y.value_in(units.parsec),s=1)
+    pyplot.show()
+    pyplot.figure()
+    pyplot.plot(time,lr1)
+    gravity.stop()
+#evolve_group(groups[4], 1000000 | units.yr)
+#groups_new = execute_hop(evolved_group)
+#plot_clumps(evolved_group, evolved_group.mass.sum())

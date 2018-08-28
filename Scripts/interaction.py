@@ -70,6 +70,7 @@ def integrate_system(particles, end_position):
     from amuse.lab import ph4, nbody_system
     convert_nbody = nbody_system.nbody_to_si(particles.mass.sum(), particles[0].position.length())
     gravity = ph4(convert_nbody)
+    print gravity.parameters
     gravity.particles.add_particles(particles)
     
     hvgc = gravity.particles[2]
@@ -129,7 +130,7 @@ def integrate_plotting(particles, end_position):
     convert_nbody = nbody_system.nbody_to_si(particles.mass.sum(), particles[0].position.length())
     gravity = ph4(convert_nbody)
     gravity.particles.add_particles(particles)
-    
+    print gravity.parameters
     bh1 = gravity.particles[0]
     bh2 = gravity.particles[1]
     hvgc = gravity.particles[2]

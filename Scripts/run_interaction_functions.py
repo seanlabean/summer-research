@@ -12,9 +12,9 @@ from amuse.units import constants
 import math
 bbh_mass = 7e9 | units.MSun
 mass_ratio = 0.25
-separation = 1.7 | units.parsec
-bh_phase = 0.84
-gc_closest = 2.5 | units.parsec
+separation = 3.0 | units.parsec
+bh_phase = 4.61
+gc_closest = 4.5 | units.parsec
 gc_vinf = 500 | (units.km/units.s)
 
 particles = bbh_hvgc(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf)
@@ -25,6 +25,20 @@ end_position = 120 | units.parsec
 
 #GC Behavior#
 hvgc_vel, xgc, ygc, xbh1, ybh1, xbh2, ybh2 = integrate_plotting(particles, end_position)
+print hvgc_vel
+'''
+x = []
+y = []
+for posx in xgc:
+    x.append(posx.value_in(units.parsec))
+for posy in ygc:
+    y.append(posy.value_in(units.parsec))
+import json
+with open('./Text/Cluster_Trials/test_particle_x.txt',"w+") as test_part_x:
+    json.dump(x, test_part_x)
+with open('./Text/Cluster_Trials/test_particle_y.txt',"w+") as test_part_y:
+    json.dump(y, test_part_y)
+'''
 plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, "hvgc1.png")
 
 #plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, 'bh_min_dist.png')

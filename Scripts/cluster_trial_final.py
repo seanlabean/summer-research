@@ -78,27 +78,27 @@ def gravity_integration(pm_particles, bbh_particles, gc_radius, runtime):
 
 bbh_mass = 7e9 | units.MSun
 mass_ratio = 0.25
-bbh_separation = 1.7 | units.parsec
-gc_closest = 2.5 | units.parsec
-bbh_phase = 1.68
+bbh_separation = 3.0 | units.parsec
+gc_closest = 4.5 | units.parsec
+bbh_phase = 4.61
 gc_vinf = 500 | (units.km/units.s)
 gc_mass = 1e7 | units.MSun
-gc_radius = 6 | units.parsec
+gc_radius = 1 | units.parsec
 
 b = impact_parameter(bbh_mass, gc_closest, gc_vinf)
 pm_particles = plummer(gc_mass, gc_radius, 1000, b)
 pm_start = pm_particles.copy()
 bbh_particles = particle_set(bbh_mass, mass_ratio, bbh_separation, bbh_phase)
 
-runtime = 1000000 | units.yr
+runtime = 20000000 | units.yr
 pm_start, pm_end, time, lr1, lr2, lr4, lr6 = gravity_integration(pm_particles, bbh_particles, gc_radius, runtime)
 
-file_location = './Text/Cluster_Trials/6pc/'
-trial_name = '3000kms1Myr'
-write_set_to_file(pm_start, file_location+trial_name+'_start.hdf5',format='hdf5')
+file_location = './Text/Cluster_Trials/1pc/'
+trial_name = '2300kms20Myr'
+#write_set_to_file(pm_start, file_location+trial_name+'_start.hdf5',format='hdf5')
 write_set_to_file(pm_end, file_location+trial_name+'_end.hdf5',format='hdf5')
 
-"""
+'''
 with open(file_location+trial_name+'_time.txt',"w+") as time_file:
     json.dump(time, time_file)
 with open(file_location+trial_name+'_lr1.txt',"w+") as lr1_file:
@@ -109,4 +109,4 @@ with open(file_location+trial_name+'_lr4.txt',"w+") as lr4_file:
     json.dump(lr4, lr4_file)
 with open(file_location+trial_name+'_lr6.txt',"w+") as lr6_file:
     json.dump(lr6, lr6_file)
-"""
+'''

@@ -89,7 +89,7 @@ b = impact_parameter(bbh_mass, gc_closest, gc_vinf)
 pm_particles = plummer(gc_mass, gc_radius, 1000, b)
 pm_start = pm_particles.copy()
 bbh_particles = particle_set(bbh_mass, mass_ratio, bbh_separation, bbh_phase)
-
+'''
 runtime = 1000000 | units.yr
 pm_start, pm_end, time, lr1, lr2, lr4, lr6 = gravity_integration(pm_particles, bbh_particles, gc_radius, runtime)
 
@@ -109,3 +109,4 @@ with open(file_location+trial_name+'_lr4.txt',"w+") as lr4_file:
     json.dump(lr4, lr4_file)
 with open(file_location+trial_name+'_lr6.txt',"w+") as lr6_file:
     json.dump(lr6, lr6_file)
+'''

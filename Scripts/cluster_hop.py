@@ -1,6 +1,7 @@
 from amuse.lab import *
 import matplotlib.pyplot as pyplot
 import numpy as np
+import matplotlib
 from cluster_hop_automated import execute_hop
 cluster = read_set_from_file('./Text/Cluster_Trials/6pc/3000kms2Gyr_end.hdf5',format='hdf5')
 
@@ -10,7 +11,7 @@ conv = nbody_system.nbody_to_si(cluster_total_M, cluster_total_E)
 print cluster.LagrangianRadii(conv)
 hop = Hop(unit_converter=conv)
 
-hop.parameters.number_of_neighbors_for_hop = 50
+hop.parameters.number_of_neighbors_for_hop = 10
 hop.parameters.number_of_particles_per_group_pair_boundary = 4
 hop.relative_saddle_density_threshold = True
 hop.set_relative_saddle_density_threshold(True)
@@ -35,7 +36,14 @@ def plot_clumps(groups, total_mass):
         fraction_of_mass_in_group.append(fraction)
 
     figure = pyplot.figure(figsize= (6,6))
-
+    params = {'axes.labelsize': 16,
+          'axes.titlesize':18, 
+          'font.size': 14, 
+          'legend.fontsize': 14, 
+          'xtick.labelsize': 14, 
+          'ytick.labelsize': 14
+         }
+    matplotlib.rcParams.update(params)
 
     #subplot = figure.add_subplot(1, 2, 1)
 
@@ -44,20 +52,20 @@ def plot_clumps(groups, total_mass):
         color = colormap(index) #colormap(1.0 * index / len(groups))
         pos,coreradius,coredens=group.densitycentre_coreradius_coredens(conv)
         pyplot.scatter(
-            group.x.value_in(units.parsec),
-            group.y.value_in(units.parsec),
+            group.x.value_in(units.parsec)/1000000,
+            group.y.value_in(units.parsec)/1000000,
             s = 1,
             edgecolors = color,
             facecolors = color,
-            label = "{:.2F}".format(fraction_of_mass_in_group[index])
+            label = "mf = {:.3F}".format(fraction_of_mass_in_group[index])
         )
-        density_string = ' MSun/kpc**3' #$\frac{M_\odot}{kpc^3}$
-        pyplot.scatter(pos.x.value_in(units.parsec), 
-                       pos.y.value_in(units.parsec),
-                       s=10,
+        density_string = ''#r"$\frac{M_\odot}{kpc^3}$"
+        pyplot.scatter(pos.x.value_in(units.parsec)/1000000, 
+                       pos.y.value_in(units.parsec)/1000000,
+                       s=15,
                        color = 'black',
                        marker = 'x',
-                       label = '{:.2F}'.format(coredens.value_in(units.MSun/(1000*units.parsec)**3))+density_string
+                       label = '{:.3F}'.format(coredens.value_in(units.MSun/(1000*units.parsec)**3))+density_string
                        )
         '''
         subplot.scatter(
@@ -75,9 +83,17 @@ def plot_clumps(groups, total_mass):
     #subplot.set_ylim(0,1)
     #subplot.set_xlabel('x (parsec)')
     #subplot.set_ylabel('y (parsec)')
-    pyplot.xlabel('x (parsec)')
-    pyplot.ylabel('y (parsec)')
-    pyplot.legend()
+    pyplot.xlim(-10,10)
+    pyplot.ylim(-10,10)
+    pyplot.yticks(np.arange(-10,11,step=5))
+    pyplot.title('Subgroups in 1pc Cluster After 2 Gyr')
+    pyplot.minorticks_on()
+    pyplot.tick_params(which='minor',direction='in')
+    pyplot.tick_params(size = 6, width = 1, direction='in')
+    pyplot.grid(alpha=0.25)
+    pyplot.xlabel('x (Mpc)')
+    pyplot.ylabel('y (Mpc)')
+    pyplot.legend(markerscale=2)
     """
     subplot = figure.add_subplot(1, 2, 2)
 
@@ -91,7 +107,7 @@ def plot_clumps(groups, total_mass):
     subplot.set_xlabel('N')
     subplot.set_ylabel('df/d(Log_10 N)')
     """
-    #figure.savefig('x.png')
+    #figure.savefig('./Images/groups_1pc2Gyr')
     pyplot.show()
 def vector_norm(vector):
     norm = np.sqrt(vector[0]**2 + vector[1]**2 + vector[2]**2)

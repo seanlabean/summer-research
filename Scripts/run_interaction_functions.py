@@ -11,10 +11,10 @@ from amuse.lab import Particles, units
 from amuse.units import constants
 import math
 bbh_mass = 7e9 | units.MSun
-mass_ratio = 0.25
+mass_ratio = 0.1
 separation = 3.0 | units.parsec
-bh_phase = 4.61
-gc_closest = 4.5 | units.parsec
+bh_phase = 23*math.pi/15
+gc_closest = 5.5 | units.parsec
 gc_vinf = 500 | (units.km/units.s)
 
 particles = bbh_hvgc(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf)

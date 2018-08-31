@@ -162,25 +162,40 @@ def integrate_plotting(particles, end_position):
 def plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, output_filename):
     """Input: particle position lists. Output: visual of particle paths."""
     from matplotlib import pyplot
+    import matplotlib
     figure = pyplot.figure(figsize=(7,7))
-    pyplot.rcParams.update({'font.size': 16})
+    params = {'axes.labelsize': 18,
+          'axes.titlesize':20, 
+          'font.size': 14, 
+          'legend.fontsize': 14, 
+          'xtick.labelsize': 14, 
+          'ytick.labelsize': 14
+         }
+    matplotlib.rcParams.update(params)
     plot = figure.add_subplot(1,1,1)
     ax = pyplot.gca()
     ax.minorticks_on()
     ax.locator_params(nbins=3)
-
+    ax.tick_params(which='minor',direction='in')
+    ax.tick_params(size = 6, width = 1, direction='in')
+    ax.grid(alpha=0.25)
     x_label = 'x [pc]'
     y_label = 'y [pc]'
     title_ = 'GC Capture by SMBBH'
     pyplot.xlabel(x_label)
     pyplot.ylabel(y_label)
     pyplot.title(title_)
-#    pyplot.xlim(-5,5)                                                                                       
-#    pyplot.ylim(-5,5)                                                                                       
+    pyplot.xlim(-75,75)                                                                                       
+    pyplot.ylim(-130,20)
+    plot.scatter(xgc[0].value_in(units.parsec), 
+                 ygc[0].value_in(units.parsec), 
+                 marker='x',
+                 color = 'r', 
+                 label='Start')
     plot.plot(xgc.value_in(units.parsec), ygc.value_in(units.parsec), color = 'r', label='GC')
     plot.plot(xbh1.value_in(units.parsec), ybh1.value_in(units.parsec), color = 'k',label='BH1')
     plot.plot(xbh2.value_in(units.parsec), ybh2.value_in(units.parsec), color = 'b',label='BH2')
-    plot.legend(loc='lower center')
+    plot.legend(loc='lower left')
     save_file = './Images/'+output_filename
     pyplot.savefig(save_file)
     print '\nSaved figure in file', save_file, '\n'

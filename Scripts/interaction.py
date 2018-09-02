@@ -70,7 +70,7 @@ def integrate_system(particles, end_position):
     from amuse.lab import ph4, nbody_system
     convert_nbody = nbody_system.nbody_to_si(particles.mass.sum(), particles[0].position.length())
     gravity = ph4(convert_nbody)
-    print gravity.parameters
+
     gravity.particles.add_particles(particles)
     
     hvgc = gravity.particles[2]
@@ -79,7 +79,7 @@ def integrate_system(particles, end_position):
     while hvgc_pos < end_position:
         gravity.evolve_model(gravity.model_time + (100 | units.yr))
         hvgc_pos = (hvgc.x**2 + hvgc.y**2 + hvgc.z**2).sqrt()
-        if gravity.model_time > (200000 | units.yr):
+        if gravity.model_time > (400000 | units.yr):
             hvgc_pos = end_position
             captured = True
             break
@@ -88,6 +88,8 @@ def integrate_system(particles, end_position):
     else:
         hvgc_vel = (hvgc.vx**2 + hvgc.vy**2 + hvgc.vz**2).sqrt()
     gravity.stop()
+    print hvgc_vel
+    print captured
     return hvgc_vel
 
 def bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, file_name):
@@ -101,19 +103,30 @@ def bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vi
         hvgc_vel = integrate_system(particles, end_position).value_in(units.kms)
         phase_list.append(phase)
         velocity_list.append(hvgc_vel)
-        phase += math.pi/20
+        phase += math.pi/15
         print phase
-
-    figure = pyplot.figure(figsize=(9,9))
-    pyplot.rcParams.update({'font.size': 24})
+    import matplotlib
+    figure = pyplot.figure(figsize=(7,7))
+    params = {'axes.labelsize': 18,
+          'axes.titlesize':20,
+          'font.size': 14,
+          'legend.fontsize': 14,
+          'xtick.labelsize': 14,
+          'ytick.labelsize': 14
+         }
+    matplotlib.rcParams.update(params)
     plot = figure.add_subplot(1,1,1)
     ax = pyplot.gca()
     ax.minorticks_on()
     ax.locator_params(nbins=3)
-    x_label = 'phase [rad]'
-    y_label = 'velocity at 120pc [km/s]'
+    ax.tick_params(which='minor',direction='in')
+    ax.tick_params(size = 6, width = 1, direction='in')
+    ax.grid(alpha=0.25)
+    x_label = 'BBH Phase [rad]'
+    y_label = 'Particle Velocity at 120pc [km/s]'
     pyplot.xlabel(x_label)
     pyplot.ylabel(y_label)
+    pyplot.title('Velocity Dependence on BBH Phase')
     plot.plot(phase_list, velocity_list, ls = '-')
     save_file = './Images/'+file_name
     pyplot.savefig(save_file)
@@ -325,13 +338,24 @@ def integrate_energy(particles, end_condition):
 def plot_energy(bh1_energy, bh2_energy, bbh_energy, hvgc_energy, total_energy, time, filename):
     """Given energy and time lists, plot time vs. energy."""
     from matplotlib import pyplot
-    figure = pyplot.figure(figsize=(6,6))
-    pyplot.rcParams.update({'font.size': 16})
+    import matplotlib
+    figure = pyplot.figure(figsize=(7,7))
+    params = {'axes.labelsize': 18,
+          'axes.titlesize':19,
+          'font.size': 14,
+          'legend.fontsize': 14,
+          'xtick.labelsize': 14,
+          'ytick.labelsize': 14
+         }
+    matplotlib.rcParams.update(params)
     plot = figure.add_subplot(1,1,1)
     ax = pyplot.gca()
     ax.minorticks_on()
-    ax.locator_params(nbins=3)
-    pyplot.title('Relative Energy of GC')
+    ax.locator_params(nbins=5)
+    ax.tick_params(which='minor',direction='in')
+    ax.tick_params(size = 6, width = 1, direction='in')
+    ax.grid(alpha=0.25)
+    pyplot.title('Relative Energy of Ejected GC')
     x_label = 'time [years]'
     y_label = 'energy [J]'
     pyplot.xlabel(x_label)

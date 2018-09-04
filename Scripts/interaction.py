@@ -17,7 +17,7 @@ def bbh_orbit(bbh_mass, mass_ratio, separation):
     T = ((4*(math.pi**2)*a**3)/(G*bbh_mass)).sqrt()
     v1 = (2*math.pi*r1)/T
     v2 = (2*math.pi*r2)/T
-
+    print "BBH orbit period", T
     return r1.in_(units.parsec), r2.in_(units.parsec), v1.in_(units.km/units.s), v2.in_(units.km/units.s)
 
 def impact_parameter(bbh_mass, gc_closest, gc_vinf):

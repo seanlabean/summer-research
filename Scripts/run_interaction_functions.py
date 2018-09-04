@@ -11,20 +11,20 @@ from amuse.lab import Particles, units
 from amuse.units import constants
 import math
 bbh_mass = 7e9 | units.MSun
-mass_ratio = 0.1
-separation = 3.0 | units.parsec
-bh_phase = math.pi/20
-gc_closest = 5.5 | units.parsec
+mass_ratio = 0.25
+separation = 1.7 | units.parsec
+bh_phase = 1.47
+gc_closest = 2.5 | units.parsec
 gc_vinf = 500 | (units.km/units.s)
 
 particles = bbh_hvgc(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf)
 end_position = 120 | units.parsec
 
 #Final Velocity vs. Phase#
-bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position,'phase_loop.png') 
+#bbh_phase_loop(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position,'phase_loop.png') 
 
 #GC Behavior#
-#hvgc_vel, xgc, ygc, xbh1, ybh1, xbh2, ybh2 = integrate_plotting(particles, end_position)
+hvgc_vel, xgc, ygc, xbh1, ybh1, xbh2, ybh2 = integrate_plotting(particles, end_position)
 #print hvgc_vel
 '''
 x = []
@@ -39,7 +39,7 @@ with open('./Text/Cluster_Trials/test_particle_x.txt',"w+") as test_part_x:
 with open('./Text/Cluster_Trials/test_particle_y.txt',"w+") as test_part_y:
     json.dump(y, test_part_y)
 '''
-#plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, "hvgc1.png")
+plot_track(xgc, ygc, xbh1, ybh1, xbh2, ybh2, "hvgc1.png")
 
 #plot_min(bbh_mass, mass_ratio, separation, bh_phase, gc_closest, gc_vinf, end_position, 'bh_min_dist.png')
 
